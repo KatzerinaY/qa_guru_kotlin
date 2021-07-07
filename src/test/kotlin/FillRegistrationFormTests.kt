@@ -5,8 +5,14 @@ import com.github.javafaker.Faker
 import com.codeborne.selenide.Selenide
 import org.junit.jupiter.api.Test
 import java.util.*
+import io.qameta.allure.Allure.step
+import io.qameta.allure.Allure.StepContext
+//import io.qameta.allure.Allure.*
+import io.qameta.allure.selenide.AllureSelenide
+import com.codeborne.selenide.logevents.SelenideLogger
 
 class FillRegistrationFormTests : TestBase() {
+
     private var regPage = RegistrationPage()
     private var regModForm = RegistrationConfirmationForm()
     private var formatterMonth = SimpleDateFormat("MMMM", Locale.ENGLISH)
@@ -34,7 +40,16 @@ class FillRegistrationFormTests : TestBase() {
 
     @Test
     fun selenideSearchTest() {
-        regPage.openPage().fillFirstName(firstName)
+
+        SelenideLogger.addListener("allure", AllureSelenide())
+
+        step("Open page with registration form") {s: StepContext ->
+            regPage.openPage()
+        }
+
+
+        step("Fill students registration form"){s: StepContext ->
+        regPage.fillFirstName(firstName)
             .fillLastName(lastName)
             .fillUserEmail(userEmail)
             .fillGender(gender)
@@ -45,11 +60,15 @@ class FillRegistrationFormTests : TestBase() {
             .uploadPicture(uploadPicture)
             .fillBirthday(dateDay, dateMonth, dateYear)
             .fillStateAndCity(state, city)
+        }
 
         Selenide.sleep(3000)
 
-        regPage.submit()
+        step("button: Submit registration form") {s: StepContext ->
+            regPage.submit()
+        }
 
+        step("Check students registration form") {s: StepContext ->
         regModForm.checkName(firstName, lastName)
             .checkGender(gender)
             .checkEmail(userEmail)
@@ -60,6 +79,7 @@ class FillRegistrationFormTests : TestBase() {
             .checkPicture(uploadPicture)
             .checkAddress(currentAddress)
             .checkStateCity(state, city)
+        }
 
         Selenide.sleep(3000)
     }

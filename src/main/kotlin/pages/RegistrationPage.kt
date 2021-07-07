@@ -68,13 +68,16 @@ class RegistrationPage {
         return this
     }
 
-    fun fillStateAndCity(state: String, city: String): RegistrationPage{
-        element("#state").scrollTo()
-        element("#state").click()
-        element(Selectors.byText(state)).click()
-        element("#city").click()
-        element(Selectors.byText(city)).click()
+    fun fillStateAndCity(state: String, city: String): RegistrationPage {
+
+            element("#state").scrollTo()
+            element("#state").click()
+            element(Selectors.byText(state)).click()
+            element("#city").click()
+            element(Selectors.byText(city)).click()
+
         return this
+
     }
 
     fun submit() : RegistrationPage{
