@@ -11,7 +11,7 @@ class CalendarComponent {
     fun dateChange(dateDay: String, dateMonth: String, dateYear: String, dataLocator: String) {
         SelenideLogger.addListener("allure", AllureSelenide())
 
-        step("Fill students registration form"){s: StepContext ->
+        step("Fill data in calendar $dateDay $dateMonth $dateYear"){ _: StepContext ->
             element(dataLocator).click()
             element(".react-datepicker__month-select").selectOption(dateMonth)
             element(".react-datepicker__year-select").selectOption(dateYear)

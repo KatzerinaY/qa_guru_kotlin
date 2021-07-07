@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import java.util.*
 import io.qameta.allure.Allure.step
 import io.qameta.allure.Allure.StepContext
-//import io.qameta.allure.Allure.*
+
 import io.qameta.allure.selenide.AllureSelenide
 import com.codeborne.selenide.logevents.SelenideLogger
 
@@ -43,12 +43,12 @@ class FillRegistrationFormTests : TestBase() {
 
         SelenideLogger.addListener("allure", AllureSelenide())
 
-        step("Open page with registration form") {s: StepContext ->
+        step("Open page with registration form") {_: StepContext ->
             regPage.openPage()
         }
 
 
-        step("Fill students registration form"){s: StepContext ->
+        step("Fill students registration form"){_: StepContext ->
         regPage.fillFirstName(firstName)
             .fillLastName(lastName)
             .fillUserEmail(userEmail)
@@ -64,11 +64,11 @@ class FillRegistrationFormTests : TestBase() {
 
         Selenide.sleep(3000)
 
-        step("button: Submit registration form") {s: StepContext ->
+        step("button: Submit registration form") {_: StepContext ->
             regPage.submit()
         }
 
-        step("Check students registration form") {s: StepContext ->
+        step("Check students registration form") {_: StepContext ->
         regModForm.checkName(firstName, lastName)
             .checkGender(gender)
             .checkEmail(userEmail)

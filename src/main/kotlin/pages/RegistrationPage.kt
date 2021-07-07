@@ -5,6 +5,8 @@ import components.CalendarComponent
 import com.codeborne.selenide.Selectors
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.open
+import io.qameta.allure.Allure.step
+import io.qameta.allure.Allure.StepContext
 
 class RegistrationPage {
 
@@ -69,15 +71,14 @@ class RegistrationPage {
     }
 
     fun fillStateAndCity(state: String, city: String): RegistrationPage {
-
+        step("Fill state and city") { _: StepContext ->
             element("#state").scrollTo()
             element("#state").click()
             element(Selectors.byText(state)).click()
             element("#city").click()
             element(Selectors.byText(city)).click()
-
-        return this
-
+        }
+            return this
     }
 
     fun submit() : RegistrationPage{
